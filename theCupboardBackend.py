@@ -25,7 +25,7 @@ def find_nearby_restaurants(location, radius, dietary_restrictions):
     
     return filtered_restaurants
 
-# Example usage
+# Example 
 if __name__ == "__main__":
     user_location = get_current_location()
     if user_location:
