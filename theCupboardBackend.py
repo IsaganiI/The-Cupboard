@@ -10,7 +10,7 @@ def get_current_location():
         print("Error: Could not determine current location.")
         return None
 
-def find_nearby_restaurants(location, radius, dietary_restrictions):
+def find_nearby_restaurants(location, radius, dietary_restricts):
     # Step 1: Get points of interest (POIs) for restaurants from OpenStreetMap
     tags = {"amenity": "restaurant"}
     restaurants = ox.features_from_point((location['lat'], location['lng']), tags=tags, dist=radius)
@@ -20,7 +20,7 @@ def find_nearby_restaurants(location, radius, dietary_restrictions):
     for index, restaurant in restaurants.iterrows():
         name = restaurant.get('name', 'Unnamed Restaurant')
         # Step 2: Filter based on dietary restrictions using keywords in the restaurant's name
-        if any(keyword.lower() in name.lower() for keyword in dietary_restrictions):
+        if any(keyword.lower() in name.lower() for keyword in dietary_restricts):
             filtered_restaurants.append(name)
     
     return filtered_restaurants
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     if user_location:
         print("Current Location:", user_location)
         search_radius = 1000  # in meters (1 km)
-        user_dietary_restrictions = ["vegan", "vegetarian", "gluten-free"]
+        user_dietary_restricts = ["vegan", "vegetarian", "gluten-free"]
 
-        results = find_nearby_restaurants(user_location, search_radius, user_dietary_restrictions)
+        results = find_nearby_restaurants(user_location, search_radius, user_dietary_restricts)
         print("Filtered Restaurants:", results)
